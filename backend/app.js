@@ -23,21 +23,66 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Apna Ashiana")
-})
-
+  res.send("Welcome to Apna Ashiana");
+});
 
 // index route
 app.get("/listings", async (req, res) => {
   try {
     const allListings = await Listing.find();
-    if(allListings.length === 0) {
-      return res.status(404).json({message: "DataBase is Empty"})
+    if (allListings.length === 0) {
+      return res.status(404).json({ message: "DataBase is Empty" });
     }
     res.status(200).json(allListings);
   } catch (err) {
-    console.log(`error is found during fetching data from DataBase ${err}`)
+    console.log(`error is found during fetching data from DataBase ${err}`);
   }
+});
+
+() => {};
+
+// show route
+app.get("/listings/:id", async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+  const place = await Listing.findById(id);
+  if (!place) {
+    return res
+      .status(404)
+      .json({ message: "place not exist in the database!" });
+  }
+  res.status(200).json(place);
+});
+
+app.post("/listings", async (req, res) => {
+  const listing = req.body.listing;
+
+  const requiredFields = [
+    "title",
+    "description",
+    "price",
+    "location",
+    "country",
+  ];
+  for (const field of requiredFields) {
+    if (!listing[field] || listing[field].toString().trim() === "") {
+      return res
+        .status(400)
+        .json({ message: `Missing required field: ${field}` });
+    }
+  }
+  try {
+    const newListing = new Listing({ ...listing });
+    await newListing.save();
+    res.status(201).json(newListing);
+  } catch (err) {
+    console.log("Error saving new listing:", err);
+    res.status(500).json({ message: "Error saving new listing" });
+  }
+
+  res.send("Data received successfully");
 });
 
 app.listen(PORT, () => {

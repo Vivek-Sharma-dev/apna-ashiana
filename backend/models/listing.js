@@ -9,8 +9,12 @@ const listingSchema = new mongoose.Schema({
     default:
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop",
     type: String,
-    required: true,
-    set: (v) => (v.trim() === "" ? "https://via.placeholder.com/150" : v),
+    set: (v) => {
+      if (typeof v !== "string" || v.trim() === "") {
+        return "https://via.placeholder.com/150";
+      }
+      return v;
+    },
   },
   country: { type: String, required: true },
 });
