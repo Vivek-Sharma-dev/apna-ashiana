@@ -31,11 +31,7 @@ app.get("/", (req, res) => {
 app.get(
   "/listings",
   wrapAsync(async (req, res) => {
-    let filter;
     const allListings = await Listing.find();
-    if (allListings.length === 0) {
-      return res.status(404).json({ message: "DataBase is Empty" });
-    }
     res.status(200).json(allListings);
   }),
 );
@@ -144,4 +140,3 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
-

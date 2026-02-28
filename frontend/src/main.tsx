@@ -6,6 +6,8 @@ import Home from "./pages/Home.tsx";
 import Explore from "./pages/Explore.tsx";
 import Host from "./pages/Host.tsx";
 import Booking from "./pages/Booking.tsx";
+import ViewProduct from "./pages/ViewProduct.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,15 @@ const router = createBrowserRouter([
       { path: "/explore", element: <Explore /> },
       { path: "/host", element: <Host /> },
       { path: "/booking", element: <Booking /> },
+      { path: "/product-Details/:id", element: <ViewProduct /> },
       { path: "*", element: <h1>404 Not Found</h1> },
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />,
+  <QueryClientProvider client={queryClient}>x
+    <RouterProvider router={router} />,
+  </QueryClientProvider>,
 );
