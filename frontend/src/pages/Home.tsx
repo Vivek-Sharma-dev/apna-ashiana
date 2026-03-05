@@ -1,20 +1,17 @@
-import LISTING_API from "../api/api";
 import { type ProductType } from "../types";
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import ErrorState from "../components/ErrorState";
 import { useQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import { getAllListing } from "../api/Listing";
 const Home = () => {
   const { data, isPending, error } = useQuery<
     ProductType[],
     AxiosError<{ message: string }>
   >({
     queryKey: ["listings"],
-    queryFn: async () => {
-      const res = await LISTING_API.get("/listings");
-      return res.data;
-    },
+    queryFn: getAllListing,
   });
   if (isPending)
     return <Loader fullPage={true} message="Loading Apna Ashiana..." />;

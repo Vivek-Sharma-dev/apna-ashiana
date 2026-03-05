@@ -3,7 +3,6 @@ import { AlertCircle } from 'lucide-react';
 
 interface ErrorProps {
   message?: string;
-  onRetry?: () => void;
 }
 
 const ErrorState = ({ 

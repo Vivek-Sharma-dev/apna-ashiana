@@ -5,14 +5,14 @@ const SearchBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className={`flex items-center bg-white rounded-full p-1 transition-all duration-500 ${isExpanded ? 'shadow-lg border border-gray-200' : ""}`}>
+    <div className={`flex items-center bg-white rounded-full py-1 px-2 transition-all duration-500 ${isExpanded ? 'shadow-lg border border-gray-200' : ""}`}>
       
       {/* Search Icon Button */}
       <button 
         className="p-2 rounded-full bg-rose-500 text-white shrink-0 transition-transform active:scale-90" 
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <Search size={20} strokeWidth={3} />
+        <Search size={24} strokeWidth={3} />
       </button>
 
       {/* Form Container */}

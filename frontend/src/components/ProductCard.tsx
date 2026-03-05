@@ -1,10 +1,15 @@
 import { ShoppingCart, Heart } from "lucide-react";
 import { type ProductType } from "../types";
 import { Link } from "react-router-dom";
+import { transformCurrency } from "../functions";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <div className="group relative w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+      <Link
+        to={`/product-details/${product._id}`}
+        className="absolute inset-0 z-15"
+      />
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-50">
         <img
@@ -22,15 +27,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         </button>
 
         {/* Hover Overlay - Quick Add */}
-        <div className="absolute inset-0 z-10 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-          <button className="bg-rose-500 relative z-10 text-white px-6 py-2 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-rose-600 shadow-lg flex items-center gap-2">
+        <div className="absolute bottom-0 w-full z-30 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 lg:flex items-end justify-center pb-4 hidden">
+          <button className="bg-rose-500  text-white px-6 py-2 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-rose-600 shadow-lg flex items-center gap-2">
             <ShoppingCart size={18} />
             Add to Cart
           </button>
-          <Link
-            to={`/product-details/${product._id}`}
-            className="absolute inset-0 z-5"
-          />
         </div>
       </div>
 
@@ -45,7 +46,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
         <div className="flex items-center justify-between mt-4">
           <span className="text-2xl font-black text-gray-900">
-            ${product.price}
+            &#x20B9; {transformCurrency(product.price)}
           </span>
           <div className="flex items-center gap-1 text-sm text-gray-500">
             <span className="flex text-yellow-400">★★★★</span>

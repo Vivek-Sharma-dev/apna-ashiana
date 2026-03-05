@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
-  <QueryClientProvider client={queryClient}>x
+  <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />,
   </QueryClientProvider>,
 );
