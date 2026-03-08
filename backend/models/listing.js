@@ -18,6 +18,10 @@ const listingSchema = new mongoose.Schema({
     },
   },
   country: { type: String, required: true, trim: true  },
+  images: {
+    type: [String],
+    default: [],
+  }
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
