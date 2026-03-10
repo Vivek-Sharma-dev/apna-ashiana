@@ -19,7 +19,7 @@ export const getListingById = async (req, res) => {
 };
 
 export const createListing = async (req, res) => {
-  const listing = req.body.listing;
+  const listing = req.body.listing || req.body;
   const requiredFields = [
     "title",
     "description",
