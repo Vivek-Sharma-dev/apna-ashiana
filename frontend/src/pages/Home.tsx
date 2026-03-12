@@ -1,4 +1,4 @@
-import { type ProductType } from "../types";
+import { type ProductCardType } from "../types";
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import ErrorState from "../components/ErrorState";
@@ -7,7 +7,7 @@ import type { AxiosError } from "axios";
 import { getAllListing } from "../api/Listing";
 const Home = () => {
   const { data, isPending, error } = useQuery<
-    ProductType[],
+    ProductCardType[],
     AxiosError<{ message: string }>
   >({
     queryKey: ["listings"],
@@ -20,11 +20,12 @@ const Home = () => {
       <ErrorState message={error.response?.data?.message || error.message} />
     );
 
+    console.log(data[0].image.url)
   return (
     <>
       <section className="px-4 py-8">
         <div className="grid grid-cols-3 space-x-5 space-y-5">
-          {data.map((item: ProductType) => (
+          {data.map((item: ProductCardType) => (
             <div key={item._id}>
               <ProductCard product={item} />
             </div>

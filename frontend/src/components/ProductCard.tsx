@@ -1,9 +1,9 @@
 import { ShoppingCart, Heart } from "lucide-react";
-import { type ProductType } from "../types";
+import { type ProductCardType } from "../types";
 import { Link } from "react-router-dom";
-import { transformCurrency } from "../functions";
+import { imageOptimizedUrl, transformCurrency } from "../utils";
 
-const ProductCard = ({ product }: { product: ProductType }) => {
+const ProductCard = ({ product }: { product: ProductCardType }) => {
   return (
     <div className="group relative w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       <Link
@@ -13,9 +13,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden bg-gray-50">
         <img
-          src={product.image}
-          alt={product.title}
+          src={imageOptimizedUrl(product.image?.url)}
+          alt={product.image?.filename}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Wishlist Button */}
@@ -46,7 +48,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
         <div className="flex items-center justify-between mt-4">
           <span className="text-2xl font-black text-gray-900">
-            &#x20B9; {transformCurrency(product.price)}
+            &#x20B9; {transformCurrency(product?.price)}
           </span>
           <div className="flex items-center gap-1 text-sm text-gray-500">
             <span className="flex text-yellow-400">★★★★</span>

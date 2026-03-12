@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import Listing from "../models/listing.js";
 
 export const getAllListings = async (req, res) => {
-  const allListings = await Listing.find();
+  const allListings = await Listing.find({})
+    .select("title price location image _id")
+    .lean();
   res.status(200).json(allListings);
 };
 
@@ -19,22 +21,16 @@ export const getListingById = async (req, res) => {
 };
 
 export const createListing = async (req, res) => {
-  const listing = req.body.listing || req.body;
-  const requiredFields = [
-    "title",
-    "description",
-    "price",
-    "location",
-    "country",
-  ];
-  for (const field of requiredFields) {
-    if (!listing[field] || listing[field].toString().trim() === "") {
-      return res
-        .status(400)
-        .json({ message: `Missing required field: ${field}` });
-    }
+  const listingData = req.body.listing || req.body;
+  let image = {
+    url: "",
+    filename: "",
+  };
+  if (req.file) {
+    image.url = req.file.path;
+    image.filename = req.file.filename;
   }
-  const newListing = new Listing({ ...listing });
+  const newListing = new Listing({ ...listingData, image });
   await newListing.save();
   res.status(201).json(newListing);
 };
