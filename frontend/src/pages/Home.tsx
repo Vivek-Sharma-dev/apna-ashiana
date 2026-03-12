@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <>
       <section className="px-4 py-8">
-        <div className="grid grid-cols-3 space-x-5 space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-5 space-y-5">
           {data.map((item: ProductCardType) => (
             <div key={item._id}>
               <ProductCard product={item} />
