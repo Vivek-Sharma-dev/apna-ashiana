@@ -1,4 +1,3 @@
-import React from 'react'
 import Logo from './Logo'
 import Navlinks from './Navlinks'
 import Profile from './Profile'
