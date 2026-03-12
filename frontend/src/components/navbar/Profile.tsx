@@ -16,7 +16,9 @@ const Profile = () => {
   return (
     <>
       <div className="flex space-x-4 items-center">
+        <div className="hidden lg:inline-block">
         <SearchBar />
+        </div>
         {navLinks.map((navLink) => (
           <NavLink className={`bg-rose-500 p-2 rounded-full text-white hover:bg-gray-200 hover:text-rose-500 transition-all duration-300`} aria-label={navLink?.label} key={navLink?.label} to={navLink?.link}>
             {navLink?.icon}

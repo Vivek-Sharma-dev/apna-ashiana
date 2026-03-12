@@ -47,7 +47,7 @@ const ProductCard = ({ product }: { product: ProductCardType }) => {
         </h3>
 
         <div className="flex items-center justify-between mt-4">
-          <span className="text-2xl font-black text-gray-900">
+          <span className="text-lg lg:text-2xl font-black text-gray-900">
             &#x20B9; {transformCurrency(product?.price)}
           </span>
           <div className="flex items-center gap-1 text-sm text-gray-500">

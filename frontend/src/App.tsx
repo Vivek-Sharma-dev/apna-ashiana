@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className="">
       <Header />
-      <main className="container mx-auto">
+      <main className="container mx-auto ps-3 lg:ps-0">
         <Outlet />
       </main>
     </div>
