@@ -13,7 +13,10 @@ import {
 const router = Router();
 router.get("/", wrapAsync(getAllListings));
 router.get("/:id", wrapAsync(getListingById));
-router.post("/", upload.single("image") , validationMiddleware, wrapAsync(createListing));
+router.post("/", upload.fields([
+  { name: "image", maxCount: 1 },
+  {name: "images", maxCount: 5},
+]) , validationMiddleware, wrapAsync(createListing));
  
 router.patch("/:id", validationMiddleware, wrapAsync(updateListing));
 router.delete("/:id", wrapAsync(deleteListing));

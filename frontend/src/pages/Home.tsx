@@ -20,7 +20,6 @@ const Home = () => {
       <ErrorState message={error.response?.data?.message || error.message} />
     );
 
-    console.log(data[0].image.url)
   return (
     <>
       <section className="px-4 py-8">

@@ -26,11 +26,26 @@ export const createListing = async (req, res) => {
     url: "",
     filename: "",
   };
-  if (req.file) {
-    image.url = req.file.path;
-    image.filename = req.file.filename;
+
+  if (req.files && req.files["image"]) {
+    const file = req.files["image"][0];
+    image.url = file.path;
+    image.filename = file.filename;
   }
-  const newListing = new Listing({ ...listingData, image });
+
+  const images = [];
+
+  if (req.files && req.files["images"]) {
+    const files = req.files["images"];
+    files.forEach((file) => {
+      images.push({
+        url: file.path,
+        filename: file.filename,
+      });
+    });
+  }
+
+  const newListing = new Listing({ ...listingData, image, images });
   await newListing.save();
   res.status(201).json(newListing);
 };

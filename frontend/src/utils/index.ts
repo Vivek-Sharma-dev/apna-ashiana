@@ -8,7 +8,7 @@ export const imageOptimizedUrl = (url: string) => {
 
   // for cloudinary links
   if (url.includes("res.cloudinary.com")) {
-    return url.replace("/upload/", "/upload/f-auto/q-auto/w_600/c_limit");
+    return url.replace("/upload/", "/upload/f_auto/q_auto/w_600/c_limit/");
   }
 
   // for unsplash links (seed data)

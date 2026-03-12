@@ -10,6 +10,7 @@ const Navlinks = () => {
     { label: "Home", link: "/" },
     { label: "Explore", link: "/explore" },
     { label: "Host", link: "/host" },
+    { label: "Create a listing", link: "/create-listing" },
   ];
 
   const activeClassName = "text-rose-500 font-bold after:bg-rose-500 after:w-full";
